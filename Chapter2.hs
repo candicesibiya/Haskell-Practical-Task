@@ -1,58 +1,126 @@
-Data types, Signatures, and Polymorphism
 
-Hakell Practical Tasks
-Write code to complete Practical Tasks below. Haskell editor for testing is also found below this page.
+import Data.List (sortBy)
+import Data.Ord (comparing)
 
-HC2T1 - Task 1: Checking Types in GHCi
-Open GHCi and check the types of the following expressions:
+-- HC2T1: Checking Types
+exprInt :: Int
+exprInt = 42
 
-42
-3.14
-"Haskell"
-'Z'
-True && False
-Write down the expected types before checking in GHCi.
+exprDouble :: Double
+exprDouble = 3.14
 
-HC2T2 - Task 2: Function Type Signatures
-Write function signatures for the following functions:
+exprString :: String
+exprString = "Haskell"
 
-A function add that takes two Int values and returns their sum.
-A function isEven that takes an Int and returns a Bool indicating if it's even.
-A function concatStrings that takes two String values and returns their concatenation.
-Implement these functions.
+exprChar :: Char
+exprChar = 'Z'
 
-HC2T3 - Task 3: Immutable Variables
-Define the following immutable variables in Haskell:
+exprBool :: Bool
+exprBool = True && False
 
-myAge as an Int
-piValue as a Double
-greeting as a String
-isHaskellFun as a Bool
-Try modifying one of the variables and observe what happens.
+-- HC2T2: Function Type Signatures
+add :: Int -> Int -> Int
+add x y = x + y
 
-HC2T4 - Task 4: Converting Between Infix and Prefix Notations
-Use prefix notation for the following infix expressions:
+isEven :: Int -> Bool
+isEven n = n `mod` 2 == 0
 
-5 + 3
-10 * 4
-True && False
-Use infix notation for the following prefix functions:
+concatStrings :: String -> String -> String
+concatStrings s1 s2 = s1 ++ s2
 
-(+) 7 2
-(*) 6 5
-(&&) True False
-HC2T5 - Task 5: Defining and Using Functions
-Write a function circleArea that takes a Float radius and returns the area of the circle.
-Write a function maxOfThree that takes three Int values and returns the maximum.
-Test your functions with different inputs.
-HC2T6 - Task 6: Understanding Int vs Integer
-Define an Int variable smallNumber with the value 262.
-Define an Integer variable bigNumber with the value 2127.
-Try to evaluate 2^64 :: Int in GHCi and note the result.
-HC2T7 - Task 7: Boolean Expressions
-Write Boolean expressions that evaluate to:
+-- HC2T3: Immutable Variables
+myAge :: Int
+myAge = 21
 
-True using &&
-False using ||
-True using not
-A comparison that returns False
+piValue :: Double
+piValue = 3.14159
+
+greeting :: String
+greeting = "Hello, Haskell!"
+
+isHaskellFun :: Bool
+isHaskellFun = True
+
+-- HC2T4: Infix vs Prefix Notation
+prefix1 = (+) 5 3      
+prefix2 = (*) 10 4     
+prefix3 = (&&) True False  
+
+infix1 = 7 + 2         
+infix2 = 6 * 5         
+infix3 = True && False 
+
+-- HC2T5: Defining Functions
+circleArea :: Float -> Float
+circleArea r = pi * r * r
+
+maxOfThree :: Int -> Int -> Int -> Int
+maxOfThree a b c = max a (max b c)
+
+-- HC2T6: Int vs Integer
+smallNumber :: Int
+smallNumber = 262
+
+bigNumber :: Integer
+bigNumber = 2127
+
+-- HC2T7: Boolean Expressions
+expr1 :: Bool
+expr1 = True && (5 > 3)
+
+expr2 :: Bool
+expr2 = False || (3 > 10)
+
+expr3 :: Bool
+expr3 = not False
+
+expr4 :: Bool
+expr4 = 7 == 10
+
+
+-- MAIN: Run all tasks
+main :: IO ()
+main = do
+    putStrLn "=== HC2T1: Checking Types ==="
+    print exprInt
+    print exprDouble
+    print exprString
+    print exprChar
+    print exprBool
+
+    putStrLn "\n=== HC2T2: Functions ==="
+    print (add 5 7)
+    print (isEven 10)
+    print (isEven 13)
+    print (concatStrings "Hello, " "Haskell!")
+
+    putStrLn "\n=== HC2T3: Immutable Variables ==="
+    print myAge
+    print piValue
+    print greeting
+    print isHaskellFun
+
+    putStrLn "\n=== HC2T4: Infix vs Prefix ==="
+    print prefix1
+    print prefix2
+    print prefix3
+    print infix1
+    print infix2
+    print infix3
+
+    putStrLn "\n=== HC2T5: Functions circleArea & maxOfThree ==="
+    print (circleArea 5)
+    print (circleArea 2.5)
+    print (maxOfThree 10 20 15)
+    print (maxOfThree 7 3 9)
+
+    putStrLn "\n=== HC2T6: Int vs Integer ==="
+    print smallNumber
+    print bigNumber
+    putStrLn "Note: 2^64 :: Int will overflow; 2^64 :: Integer works fine in GHCi"
+
+    putStrLn "\n=== HC2T7: Boolean Expressions ==="
+    print expr1
+    print expr2
+    print expr3
+    print expr4
